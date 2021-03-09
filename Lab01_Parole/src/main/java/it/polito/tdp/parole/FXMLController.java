@@ -1,6 +1,7 @@
 package it.polito.tdp.parole;
 
-import it.polito.tdp.parole.model.Parole;
+import it.polito.tdp.parole.model.ParoleArrayList;
+import it.polito.tdp.parole.model.ParoleLinkedList;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +13,8 @@ import javafx.scene.control.TextField;
 
 public class FXMLController {
 	
-	Parole elenco ;
+	ParoleArrayList elenco;
+	ParoleLinkedList elenco2;
 	String prova;
 
     @FXML
@@ -42,33 +44,52 @@ public class FXMLController {
     @FXML
     void doInsert(ActionEvent event) {
     	this.elenco.addParola(this.txtParola.getText());
+    	this.elenco2.addParola(this.txtParola.getText());
     	this.txtTempistiche.clear();
     	this.txtResult.clear();
     	for(String s : this.elenco.getElenco()) {
     		this.txtResult.appendText(s+"\n");
     	}
     	this.txtParola.clear();
-    	this.txtTempistiche.setText("Durata Inserimento: "+Long.toString(this.elenco.getDurataAdd())+" nanosecondi\n");
+    	
+    	this.txtTempistiche.setText("Tempistiche ArrayList\n");
+    	this.txtTempistiche.appendText("Durata Inserimento: "+Long.toString(this.elenco.getDurataAdd())+" nanosecondi\n");
     	this.txtTempistiche.appendText("Durata Sort: "+Long.toString(this.elenco.getDurataSort())+" nanosecondi\n");
+    	
+    	this.txtTempistiche.appendText("\nTempistiche LinkedList\n");
+    	this.txtTempistiche.appendText("Durata Inserimento: "+Long.toString(this.elenco2.getDurataAdd())+" nanosecondi\n");
+    	this.txtTempistiche.appendText("Durata Sort: "+Long.toString(this.elenco2.getDurataSort())+" nanosecondi\n");
     }
 
     @FXML
     void doReset(ActionEvent event) {
     	this.elenco.reset();
+    	this.elenco2.reset();
     	this.txtResult.clear();
     	this.txtParola.clear();
-    	this.txtTempistiche.setText("Durata Reset: "+Long.toString(this.elenco.getDurataReset())+" nanosecondi");
+    	
+    	this.txtTempistiche.setText("Tempistiche ArrayList\n");
+    	this.txtTempistiche.appendText("Durata Reset: "+Long.toString(this.elenco.getDurataReset())+" nanosecondi\n");
+    
+    	this.txtTempistiche.appendText("\nTempistiche LinkedList\n");
+    	this.txtTempistiche.appendText("Durata Reset: "+Long.toString(this.elenco2.getDurataReset())+" nanosecondi\n");
     }
     
 
     @FXML
     void doCancella(ActionEvent event) {
     	this.elenco.cancella(this.txtResult.getSelectedText());
+    	this.elenco2.cancella(this.txtResult.getSelectedText());
     	this.txtResult.clear();
     	for(String s : this.elenco.getElenco()) {
     		this.txtResult.appendText(s+"\n");
     	}
-    	this.txtTempistiche.setText("Durata Remove: "+Long.toString(this.elenco.getDurataRemove())+" nanosecondi");
+    	
+    	this.txtTempistiche.setText("Tempistiche ArrayList\n");
+    	this.txtTempistiche.appendText("Durata Remove: "+Long.toString(this.elenco.getDurataRemove())+" nanosecondi\n");
+    	
+    	this.txtTempistiche.appendText("\nTempistiche LinkedList\n");
+    	this.txtTempistiche.appendText("Durata Remove: "+Long.toString(this.elenco2.getDurataRemove())+" nanosecondi\n");
     }
 
     @FXML
@@ -80,6 +101,7 @@ public class FXMLController {
         assert btnCancella != null : "fx:id=\"btnCancella\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
 
-        elenco = new Parole() ;
+        elenco = new ParoleArrayList();
+        elenco2 = new ParoleLinkedList();
     }
 }

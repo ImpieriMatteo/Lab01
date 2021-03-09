@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Parole {
+public class ParoleArrayList {
 		
 	private List<String> elencoParole;
 	private long durataAdd;
@@ -12,7 +12,7 @@ public class Parole {
 	private long durataReset;
 	private long durataRemove;
 	
-	public Parole() {
+	public ParoleArrayList() {
 		this.elencoParole = new ArrayList<>();
 		this.durataAdd = 0;
 		this.durataSort = 0;
